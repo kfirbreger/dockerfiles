@@ -1,4 +1,4 @@
-FROM ubuntu:bionic
+FROM golang:latest
 
 ARG VERSION="3.6.1"
 
@@ -19,6 +19,9 @@ RUN make install
 
 # refresh shared library cache
 RUN ldconfig
+
+# Install go plugin
+RUN go get -u github.com/golang/protobuf/protoc-gen-go
 
 # Running protoc
 ENTRYPOINT ["protoc"]
